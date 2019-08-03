@@ -65,7 +65,8 @@ function fmtBasicStyle(rng) {
   for (var r = 0; r < vals.length; r++) for (var c = 0; c < vals[r].length; c++)
     rng.getCell(r+1, c+1)
       .setBackground(c == 0 ? headerColColorBase : colorBase)
-      .setFontColor(textColor);
+      .setFontColor(textColor)
+      .setBorder(true, true, true, true, false, false, "black", SpreadsheetApp.BorderStyle.SOLID);
 }
 
 // https://stackoverflow.com/a/6117889

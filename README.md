@@ -19,6 +19,7 @@ The assumptions about the user are as follows:
 - Their main source of income is selling their time (i.e. employees or freelancers).
 - They are disciplined enough to spend about an hour per week to maintain their financial lives in order.
 - They do not already have their own opinionated method of maintaining order in their financial lives.
+- They are familiar with Google Sheets or similar spreadsheet programs.
 
 ## Model
 Financial life of a person is represented in this app with three models:
@@ -141,3 +142,10 @@ You can see the impact of your decisions for timespans more than one month. If y
 ![Case](/imgs/chaining.png)
 
 Now whatever financial decisions you make this month will impact the starting cash of the next month.
+
+## Scripting
+You can access the script code for modification via "Tools/Script Editor". If you are familiar with Javascript, you can hack the script to do extra things for you.
+
+One useful thing to look at is the `Constants.gs` file. It has the ranges, magic values and styling info the script uses, all in one place. E.g. if you decide to add some extra budget rows, you can update the budget rows coordinates in that file to make the script aware of your change.
+
+Also all the scripts are available in this repository.

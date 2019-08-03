@@ -1,8 +1,8 @@
-function budget_main(rangeStrSpec, startCol) {  // E.g. "A4:D30", 0
+function budget_main(rangeStrSpec) {
   var rng = SpreadsheetApp.getActive().getRange(rangeStrSpec);
 
   fmtBasicStyle(rng);
-  rng.sort([{column: startCol+2, ascending: true}, {column: startCol+3, ascending: true}]);  // Sort by date first and by amount second
+  rng.sort([{column: 2, ascending: true}, {column: 3, ascending: true}]);  // Sort by date first and by amount second
   
   fmtAmounts(rng);
   fmtWeeks(rng);
@@ -14,10 +14,10 @@ function budget_main(rangeStrSpec, startCol) {  // E.g. "A4:D30", 0
 
 function computeDelta(rng) {
   var vals = rng.getValues(); // get values array from range
-  var targetDay = SpreadsheetApp.getActive().getRange("G18").getValue();
+  var targetDay = SpreadsheetApp.getActive().getRange(budget_delta_targetDay).getValue();
   var row = budgetRowForDay(vals, targetDay);  // get the target day's budget row
   var cumulativeProjected = vals[row][3]; // get the cumulative value for that row
-  SpreadsheetApp.getActive().getRange("G20").setValue(cumulativeProjected); // set the "Projected Total" to that value
+  SpreadsheetApp.getActive().getRange(budget_delta_projectedTotal).setValue(cumulativeProjected); // set the Projected Total to that value
 }
 
 function fmtAmounts(rng) {
@@ -46,7 +46,7 @@ function fmtEmptyCumulatives(rng) {
     [3].forEach(function (col) { rng.getCell(row+1, col+1).setFontColor(colorBase) });
 }
 
-function fmtCurrentDate(rng) { // var rng = sheet.getRange("A4:E30");
+function fmtCurrentDate(rng) {
   var vals = rng.getValues();
   var minRow = budgetRowForDay(vals, new Date());
   
@@ -60,7 +60,7 @@ function fmtCurrentDate(rng) { // var rng = sheet.getRange("A4:E30");
   }
 }
 
-function fmtBasicStyle(rng) {  // var rng = sheet.getRange("A4:E30");
+function fmtBasicStyle(rng) {
   var vals = rng.getValues()
   for (var r = 0; r < vals.length; r++) for (var c = 0; c < vals[r].length; c++)
     rng.getCell(r+1, c+1)

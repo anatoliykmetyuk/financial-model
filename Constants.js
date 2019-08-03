@@ -1,7 +1,7 @@
 // Ranges & Cell coordinates
 var budget_entriesRange         = "A4:D30";
-var budget_delta_targetDay      = "G18";
-var budget_delta_projectedTotal = "G20";
+var budget_delta_targetDay      = "G11";
+var budget_delta_projectedTotal = "G13";
 
 var cashflow_expensesRange = "A3:B21";
 var cashflow_total         = "E21";

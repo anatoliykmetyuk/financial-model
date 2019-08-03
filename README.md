@@ -135,17 +135,17 @@ Consider you are staring from the financial model as in [the template project](h
 
 You want to buy a new phone sometime during the month – say 15/08. So you enter "Phone" in cell A9, "15/08" in B9 and "-300" in C9.
 
-![Case](/imgs/case-1.png)
+![Case](/imgs/case-01.png)
 
 The script then moves your entry to its proper chronological place. You now see you can afford the phone since the cumulative value never goes below zero.
 
 Next you want to make a daytrip to a neighboring city which costs €300. Say 10/08:
 
-![Case](/imgs/case-2.png)
+![Case](/imgs/case-02.png)
 
 You see you cannot afford it since the cumulative values go negative at some point. What can you do to afford it? Let's try removing the phone expense. Select columns A8:C8 and hit Backspace:
 
-![Case](/imgs/case-3.png)
+![Case](/imgs/case-03.png)
 
 So one option is not to buy a phone. You may discover other options by playing with the model :)
 

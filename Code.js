@@ -1,8 +1,8 @@
 function onEdit(e) {
   var name = e.source.getActiveSheet().getName();
-  if (['0', '1'].indexOf(name.charAt(0)) != -1) budget_main("A4:D30", 0);  // Only run the sorting logic on the sheets starting with the number of a month
-  else if (name == "Cashflow") cashflow_main();
-  else if (name == "Subscriptions") subscriptions_main();
+  if (budget_sheetName_startChars.indexOf(name.charAt(0)) != -1) budget_main();
+  else if (name == cashflow_sheetName) cashflow_main();
+  else if (name == subscriptions_sheetName) subscriptions_main();
 }
 
 function budgetRowForDay(vals, day) {

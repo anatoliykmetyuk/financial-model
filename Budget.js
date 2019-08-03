@@ -1,5 +1,5 @@
-function budget_main(rangeStrSpec) {
-  var rng = SpreadsheetApp.getActive().getRange(rangeStrSpec);
+function budget_main() {
+  var rng = SpreadsheetApp.getActive().getRange(budget_entriesRange);
 
   fmtBasicStyle(rng);
   rng.sort([{column: 2, ascending: true}, {column: 3, ascending: true}]);  // Sort by date first and by amount second

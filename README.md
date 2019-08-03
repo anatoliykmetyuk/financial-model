@@ -48,6 +48,8 @@ Since "Living" expenses are not constant from month to month, this bottomline is
 ### Monthly Budget
 ![Monthly Budget](/imgs/budget.png)
 
+The name of the sheet must follow "mm/yy" format (month / year).
+
 If Cashflow represented recurring expenses, Monthly Budget represents one-time expenses.
 
 Let us first look at the column organization of this model and then look at its entries.
@@ -107,3 +109,35 @@ When returning to correct your budget sheets, the typical procedure is as follow
 ### Subscriptions
 ![Subscriptions](/imgs/subscrs.png)
 
+In the modern world these are the reality of life: some apps want money for you to use them. And they charge you quite rarely, e.g. once a year. So it is easy to lose track of your subscriptions.
+
+This tab does exactly that in a straightforward way. It sorts the subscriptions automatically by date.
+
+## Use case
+Consider you are staring from the financial model as in [the template project](https://docs.google.com/spreadsheets/d/1_75YNlc7KBPSW7d82w6NzdktaggdKgAb65zf3edk5-8/edit?usp=sharing).
+
+You want to buy a new phone sometime during the month – say 15/08. So you enter "Phone" in cell A9, "15/08" in B9 and "-300" in C9.
+
+![Case](/imgs/case-1.png)
+
+The script then moves your entry to its proper chronological place. You now see you can afford the phone since the cumulative value never goes below zero.
+
+Next you want to make a daytrip to a neighboring city which costs €300. Say 10/08:
+
+![Case](/imgs/case-2.png)
+
+You see you cannot afford it since the cumulative values go negative at some point. What can you do to afford it? Let's try removing the phone expense. Select columns A8:C8 and hit Backspace:
+
+![Case](/imgs/case-3.png)
+
+So one option is not to buy a phone. You may discover other options by playing with the model :)
+
+### Chaining budgets
+You can see the impact of your decisions for timespans more than one month. If you have two monthly budget sheets, you can carry the bottomline from the previous month to the next month as follows:
+
+1. In the next month, double click "Start Cash"'s "Cashflow" to modify it. Enter "=" – you will see how the cell switches to formula input.
+2. While in the formula input, go to the previous month's sheet and click its bottomline cell:
+
+![Case](/imgs/chaining.png)
+
+Now whatever financial decisions you make this month will impact the starting cash of the next month.

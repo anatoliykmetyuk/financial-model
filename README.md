@@ -34,3 +34,16 @@ Inspired by the works of Robert Kiyosaki, this model answers the following quest
 
 - How much money goes in and out of the pocket each month?
 - How much is left each month?
+
+The usage of the spreadsheet is straightforward: simply enter all of your monthly expenses in the "Expenses" section. They will be automatically sorted, and the "Living" expense will be automatically highlighted via bold font.
+
+"Living" represents a special expense. Basically these are your day-to-day expenses such as groceries. You don't know ahead of time the precise value for any given month but you can make a reasonable estimate.
+
+Since all of the other expenses are constant and well-predictable, "Living" expense is special (as we will see in the Monthly Budget model section).
+
+"Cashflow" section of the spreadsheet will calculate how much money you have left each month – your cashflow. These are your free money, the bottomline you'll have at the end of each month.
+
+Since "Living" expenses are not constant from month to month, this bottomline is supposed to also be just an estimate. It makes sense to also compute the cashflow without the living expenses. This will give the constant bottomline that will stay exactly the same each month.
+
+### Monthly Budget
+![Cashflow](/imgs/budget.png)

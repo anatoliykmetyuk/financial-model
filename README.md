@@ -2,7 +2,7 @@
 This is a Google Sheets based budgeting software.
 
 * [Quick Start](#quick-start)
-* [Purpose & Target Audience](#purpose---target-audience)
+* [Purpose and Target Audience](#purpose-and-target-audience)
 * [Model](#model)
   + [Cashflow](#cashflow)
   + [Monthly Budget](#monthly-budget)
@@ -21,7 +21,7 @@ This is a Google Sheets based budgeting software.
 1. Head to the [Google Sheets template](https://docs.google.com/spreadsheets/d/1_75YNlc7KBPSW7d82w6NzdktaggdKgAb65zf3edk5-8/edit?usp=sharing)
 2. Select "Make a Copy" from the "File" menu. This will create a copy of the template in your Google Drive.
 
-## Purpose & Target Audience
+## Purpose and Target Audience
 The purpose of the app is to model the consequences of your financial decisions in real time. The questions answered are similar to the following:
 
 - How much money will I have 3 months down the line if I go to an €1500 vacation in a week?

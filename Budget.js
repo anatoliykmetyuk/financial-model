@@ -14,7 +14,12 @@ function budget_main() {
 
 function computeDelta(rng) {
   var vals = rng.getValues(); // get values array from range
-  var targetDay = SpreadsheetApp.getActive().getRange(budget_delta_targetDay).getValue();
+  
+  // Get target date. If it is empty, set it to today's date.
+  var targetDayCell = function() { return SpreadsheetApp.getActive().getRange(budget_delta_targetDay); };
+  if (!targetDayCell().getValue()) targetDayCell().setValue(new Date());
+  var targetDay = targetDayCell().getValue();
+  
   var row = budgetRowForDay(vals, targetDay);  // get the target day's budget row
   var cumulativeProjected = vals[row][3]; // get the cumulative value for that row
   SpreadsheetApp.getActive().getRange(budget_delta_projectedTotal).setValue(cumulativeProjected); // set the Projected Total to that value

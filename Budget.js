@@ -1,33 +1,22 @@
+var budget_entriesRange         = "A4:D40";
+var budget_delta_targetDay      = "G11";
+var budget_delta_projectedTotal = "G13";
+
 function budget_main() {
   var rng = SpreadsheetApp.getActive().getRange(budget_entriesRange);
 
   fmtBasicStyle(rng);
   rng.sort([{column: 2, ascending: true}, {column: 3, ascending: true}]);  // Sort by date first and by amount second
-  
+
   fmtAmounts(rng);
   fmtWeeks(rng);
   fmtEmptyCumulatives(rng);
   fmtCurrentDate(rng);
-
-  computeDelta(rng);
-}
-
-function computeDelta(rng) {
-  var vals = rng.getValues(); // get values array from range
-  
-  // Get target date. If it is empty, set it to today's date.
-  var targetDayCell = function() { return SpreadsheetApp.getActive().getRange(budget_delta_targetDay); };
-  if (!targetDayCell().getValue()) targetDayCell().setValue(new Date());
-  var targetDay = targetDayCell().getValue();
-  
-  var row = budgetRowForDay(vals, targetDay);  // get the target day's budget row
-  var cumulativeProjected = vals[row][3]; // get the cumulative value for that row
-  SpreadsheetApp.getActive().getRange(budget_delta_projectedTotal).setValue(cumulativeProjected); // set the Projected Total to that value
 }
 
 function fmtAmounts(rng) {
   var vals = rng.getValues();
-  
+
   for (var i = 0; i < vals.length; i++)
     for (var j = 2; j < vals[i].length; j++)
       if (vals[i][j] < 0) rng.getCell(i+1, j+1).setFontColor(negativeColor);
@@ -35,7 +24,7 @@ function fmtAmounts(rng) {
 
 function fmtWeeks(rng) {
   var vals = rng.getValues();
-  
+
   for (var row = 0; row < vals.length; row++) {
     var date = vals[row][1];
     if (date && getWeekNumber(date) % 2 == 0) {
@@ -45,7 +34,7 @@ function fmtWeeks(rng) {
   }
 }
 
-function fmtEmptyCumulatives(rng) { 
+function fmtEmptyCumulatives(rng) {
   var vals = rng.getValues();
   for (var row = 0; row < vals.length; row++) if (!vals[row][0])
     [3].forEach(function (col) { rng.getCell(row+1, col+1).setFontColor(colorBase) });
@@ -54,7 +43,7 @@ function fmtEmptyCumulatives(rng) {
 function fmtCurrentDate(rng) {
   var vals = rng.getValues();
   var minRow = budgetRowForDay(vals, new Date());
-  
+
   if (minRow >= 0) {  // When we are viewing sheets for the future months, this will be -1
     for (var col = 0; col < vals[minRow].length; col++) {
       var cell = rng.getCell(minRow+1, col+1);

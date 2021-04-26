@@ -1,6 +1,4 @@
-var budget_entriesRange         = "A4:D40";
-var budget_delta_targetDay      = "G11";
-var budget_delta_projectedTotal = "G13";
+var budget_entriesRange = "A4:D30";
 
 function budget_main() {
   var rng = SpreadsheetApp.getActive().getRange(budget_entriesRange);

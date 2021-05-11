@@ -12,6 +12,37 @@ function budget_main() {
   fmtCurrentDate(rng);
 }
 
+function onBudgetNextMonth() {
+  const thisMonthName = SpreadsheetApp.getActiveSheet().getName();
+  const nextMonthName = calculateNextMonth(thisMonthName);
+  const monthStartDate = SpreadsheetApp.getActiveSheet().getRange('B3').getValue();
+  const nextMonthStartDate = new Date(monthStartDate.setMonth(monthStartDate.getMonth()+1));
+
+  SpreadsheetApp.getActiveSpreadsheet().duplicateActiveSheet();
+  const newSheet = SpreadsheetApp.getActiveSheet()
+  newSheet.setName(nextMonthName);
+  newSheet.getRange('B3').setValue(nextMonthStartDate);
+  newSheet.getRange('C3').setValue("='" + thisMonthName + "'!B31");
+  newSheet.getRange('D3:D30').protect()
+    .setDescription('Automatic Money on the Day value').setWarningOnly(true);
+
+  newSheet.getRange('A4:C30').clear();
+  newSheet.getRange('A4:C4').setValues([['Recurring Monthly', nextMonthStartDate, '=Cashflow!$B$16']]);
+  newSheet.getRange('A4').setFontWeight('bold');
+  budget_main();
+}
+
+function calculateNextMonth(thisMonthName) {
+  const thisMonthTokens = thisMonthName.split('/');
+  var nextMonthOrdinal = (+thisMonthTokens[0]) + 1;
+  var nextYearOrdinal = (+thisMonthTokens[1]);
+  if (nextMonthOrdinal > 12) {
+    nextMonthOrdinal = 1;
+    nextYearOrdinal = nextYearOrdinal + 1;
+  }
+  return ('0' + nextMonthOrdinal.toString()).slice(-2) + '/' + nextYearOrdinal;
+}
+
 function fmtAmounts(rng) {
   var vals = rng.getValues();
 

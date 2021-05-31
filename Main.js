@@ -1,6 +1,6 @@
 var budget_sheetName_startChars = ['0', '1'];
 var subscriptions_sheetName     = "Subscriptions";
-var cashflow_sheetName          = "Cashflow";
+var cashflow_sheetName          = "Financial Situation";
 
 function onEdit(e) {
   var name = e.source.getActiveSheet().getName();

@@ -27,7 +27,7 @@ function onBudgetNextMonth() {
     .setDescription('Automatic Money on the Day value').setWarningOnly(true);
 
   newSheet.getRange('A4:C30').clear();
-  newSheet.getRange('A4:C4').setValues([['Recurring Monthly', nextMonthStartDate, '=Cashflow!$B$16']]);
+  newSheet.getRange('A4:C4').setValues([['Recurring Monthly', nextMonthStartDate, "='Financial Situation'!$B$16"]]);
   newSheet.getRange('A4').setFontWeight('bold');
   budget_main();
 }

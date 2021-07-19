@@ -1,15 +1,21 @@
 var budget_entriesRange = "A4:D20";
+var budget_entriesRange_header = "A4:A20";
+var budget_entriesRange_body = "B4:D20";
 var budget_creditCardRange = "F3:I21";
+var budget_creditCardRange_header = "F3:F21";
+var budget_creditCardRange_body = "G3:I21";
 
 function budget_main() {
-  fmt_range(budget_entriesRange, 0);
-  fmt_range(budget_creditCardRange, 5)
+  fmt_range(budget_entriesRange, budget_entriesRange_header, budget_entriesRange_body, 0);
+  fmt_range(budget_creditCardRange, budget_creditCardRange_header, budget_creditCardRange_body, 5)
 }
 
-function fmt_range(rng_spec, offset) {
+function fmt_range(rng_spec, rng_spec_header, rng_spec_body, offset) {
   const rng = SpreadsheetApp.getActive().getRange(rng_spec);
 
-  fmtBasicStyle(rng);
+  fmtBasicStyle(rng,
+    SpreadsheetApp.getActive().getRange(rng_spec_header),
+    SpreadsheetApp.getActive().getRange(rng_spec_body));
   rng.sort([{column: 2+offset, ascending: true}, {column: 3+offset, ascending: true}]);  // Sort by date first and by amount second
 
   fmtAmounts(rng);
@@ -68,13 +74,12 @@ function fmtCurrentDate(rng) {
   }
 }
 
-function fmtBasicStyle(rng) {
-  var vals = rng.getValues()
-  for (var r = 0; r < vals.length; r++) for (var c = 0; c < vals[r].length; c++)
-    rng.getCell(r+1, c+1)
-      .setBackground(c == 0 ? headerColColorBase : colorBase)
-      .setFontColor(textColor)
-      .setBorder(true, true, true, true, false, false, "black", SpreadsheetApp.BorderStyle.SOLID);
+function fmtBasicStyle(rng, header_col, body_rng) {
+  header_col.setBackground(headerColColorBase);
+  body_rng.setBackground(colorBase);
+  rng
+    .setFontColor(textColor)
+    .setBorder(true, true, true, true, true, true, "black", SpreadsheetApp.BorderStyle.SOLID);
 }
 
 
@@ -100,8 +105,8 @@ function onBudgetNextMonth() {
   newSheet.getRange('F3:I21').clear();  // Credit Card
 
   // Fill in recurring expenses and credit card repay
-  newSheet.getRange('A4:C4').setValues([['Recurring Monthly', 'W0', "='Financial Situation'!$B$21"]]);
-  newSheet.getRange('A5:C5').setValues([['Credit Card', 'W0', "=-'" + thisMonthName + "'!G22"]]);
+  newSheet.getRange('A4:C4').setValues([['Recurring Monthly', 'W0', "='Financial Situation'!$B$16"]]);
+  newSheet.getRange('A5:C5').setValues([['Credit Card', 'W0', "='" + thisMonthName + "'!G22"]]);
   newSheet.getRange('A4:A5').setFontWeight('bold');
 
   // Styling

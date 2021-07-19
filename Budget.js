@@ -83,20 +83,28 @@ function onBudgetNextMonth() {
   const thisMonthName = SpreadsheetApp.getActiveSheet().getName();
   const nextMonthName = calculateNextMonth(thisMonthName);
 
+  // Duplicate sheet
   SpreadsheetApp.getActiveSpreadsheet().duplicateActiveSheet();
   const newSheet = SpreadsheetApp.getActiveSheet()
   newSheet.setName(nextMonthName);
-  newSheet.getRange('C3').setValue("='" + thisMonthName + "'!B16");
-  newSheet.getRange('D3:D15').protect()
+
+  // Fill in carryover; protect script-managed ranges
+  newSheet.getRange('C3').setValue("='" + thisMonthName + "'!B21");
+  newSheet.getRange('D3:D20').protect()
+    .setDescription('Automatic Money on the Day value').setWarningOnly(true);
+  newSheet.getRange('I3:I20').protect()
     .setDescription('Automatic Money on the Day value').setWarningOnly(true);
 
-  newSheet.getRange('A4:C15').clear();
-  newSheet.getRange('A4:C4').setValues([['Recurring Monthly', 'W1', "='Financial Situation'!$B$16"]]);
-  newSheet.getRange('A5:C5').setValues([['Credit Card', 'W1', "=-'" + thisMonthName + "'!B35"]]);
+  // Clear this month's transactions
+  newSheet.getRange('A4:C20').clear();  // Bank
+  newSheet.getRange('F3:I21').clear();  // Credit Card
+
+  // Fill in recurring expenses and credit card repay
+  newSheet.getRange('A4:C4').setValues([['Recurring Monthly', 'W0', "='Financial Situation'!$B$21"]]);
+  newSheet.getRange('A5:C5').setValues([['Credit Card', 'W0', "=-'" + thisMonthName + "'!G22"]]);
   newSheet.getRange('A4:A5').setFontWeight('bold');
 
-  newSheet.getRange('A22:C34').clear();
-  newSheet.getRange('C21').setValues([[0]]);
+  // Styling
   budget_main();
 }
 

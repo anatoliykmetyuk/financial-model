@@ -102,12 +102,22 @@ function onBudgetNextMonth() {
 
   // Clear this month's transactions
   newSheet.getRange('A4:C20').clear();  // Bank
-  newSheet.getRange('F3:I21').clear();  // Credit Card
+  newSheet.getRange('F3:H21').clear();  // Credit Card
 
   // Fill in recurring expenses and credit card repay
-  newSheet.getRange('A4:C4').setValues([['Recurring Monthly', 'W0', "='Financial Situation'!$B$16"]]);
-  newSheet.getRange('A5:C5').setValues([['Credit Card', 'W0', "='" + thisMonthName + "'!G22"]]);
+  newSheet.getRange('A4:C5').setValues([
+    ['Recurring Monthly', 'W0', "='Financial Situation'!$B$16"],
+    ['Credit Card', 'W0', "='" + thisMonthName + "'!G22"]
+  ]);
   newSheet.getRange('A4:A5').setFontWeight('bold');
+
+  // Fill in living expenses
+  newSheet.getRange('F3:H6').setValues([
+    ['Living', 'W0', "='Financial Situation'!$B$20"],
+    ['Living', 'W1', "='Financial Situation'!$B$20"],
+    ['Living', 'W2', "='Financial Situation'!$B$20"],
+    ['Living', 'W3', "='Financial Situation'!$B$20"],
+  ]);
 
   // Styling
   budget_main();

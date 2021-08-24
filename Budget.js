@@ -4,12 +4,12 @@ var budget_entriesRange_body = "B4:D30";
 var budget_creditCardRange = "F3:I31";
 var budget_creditCardRange_header = "F3:F31";
 var budget_creditCardRange_body = "G3:I31";
-var budget_bottomline_cell = "B21";
+var budget_bottomline_cell = "B31";
 var budget_credit_bottomlineCell = "G32";
 var budget_cumulativeRangeBank = "D3:D30";
 var budget_cumulativeRangeCredit = "I3:I31";
-var budget_credit_entriesRangeNoCumulative = "F3:H21";
-var budget_bank_entriesRangeNoCumulative = "A4:C20";
+var budget_credit_entriesRangeNoCumulative = "F3:H31";
+var budget_bank_entriesRangeNoCumulative = "A4:C30";
 
 function budget_main() {
   fmt_range(budget_entriesRange, budget_entriesRange_header, budget_entriesRange_body, 0);

@@ -1,9 +1,15 @@
-var budget_entriesRange = "A4:D20";
-var budget_entriesRange_header = "A4:A20";
-var budget_entriesRange_body = "B4:D20";
-var budget_creditCardRange = "F3:I21";
-var budget_creditCardRange_header = "F3:F21";
-var budget_creditCardRange_body = "G3:I21";
+var budget_entriesRange = "A4:D30";
+var budget_entriesRange_header = "A4:A30";
+var budget_entriesRange_body = "B4:D30";
+var budget_creditCardRange = "F3:I31";
+var budget_creditCardRange_header = "F3:F31";
+var budget_creditCardRange_body = "G3:I31";
+var budget_bottomline_cell = "B21";
+var budget_credit_bottomlineCell = "G32";
+var budget_cumulativeRangeBank = "D3:D30";
+var budget_cumulativeRangeCredit = "I3:I31";
+var budget_credit_entriesRangeNoCumulative = "F3:H21";
+var budget_bank_entriesRangeNoCumulative = "A4:C20";
 
 function budget_main() {
   fmt_range(budget_entriesRange, budget_entriesRange_header, budget_entriesRange_body, 0);
@@ -94,20 +100,20 @@ function onBudgetNextMonth() {
   newSheet.setName(nextMonthName);
 
   // Fill in carryover; protect script-managed ranges
-  newSheet.getRange('C3').setValue("='" + thisMonthName + "'!B21");
-  newSheet.getRange('D3:D20').protect()
+  newSheet.getRange('C3').setValue("='" + thisMonthName + "'!" + budget_bottomline_cell);
+  newSheet.getRange(budget_cumulativeRangeBank).protect()
     .setDescription('Automatic Money on the Day value').setWarningOnly(true);
-  newSheet.getRange('I3:I20').protect()
+  newSheet.getRange(budget_cumulativeRangeCredit).protect()
     .setDescription('Automatic Money on the Day value').setWarningOnly(true);
 
   // Clear this month's transactions
-  newSheet.getRange('A4:C20').clear();  // Bank
-  newSheet.getRange('F3:H21').clear();  // Credit Card
+  newSheet.getRange(budget_bank_entriesRangeNoCumulative).clear();  // Bank
+  newSheet.getRange(budget_credit_entriesRangeNoCumulative).clear();  // Credit Card
 
   // Fill in recurring expenses and credit card repay
   newSheet.getRange('A4:C5').setValues([
     ['Recurring Monthly', 'W0', "='Financial Situation'!$B$16"],
-    ['Credit Card', 'W0', "='" + thisMonthName + "'!G22"]
+    ['Credit Card', 'W0', "='" + thisMonthName + "'!" + budget_credit_bottomlineCell]
   ]);
   newSheet.getRange('A4:A5').setFontWeight('bold');
 
